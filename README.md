@@ -1,6 +1,7 @@
 # ⚡ Minimal Dark Quiz App
 
 A sleek, responsive, and lightweight Quiz Application built with **Vanilla JavaScript**, **HTML5**, and **Tailwind CSS**. Features a modern dark-mode glassmorphism interface with dynamic state rendering and score tracking.
+
 ![Project Preview](./preview.png)
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
