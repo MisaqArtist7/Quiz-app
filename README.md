@@ -4,6 +4,8 @@ A sleek, responsive, and lightweight Quiz Application built with **Vanilla JavaS
 
 ![Project Preview](./preview.png)
 
+🔗 Live Demo: [https://single-page-cv-kappa.vercel.app/](https://quiz-app-puce-kappa.vercel.app/)
+
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
