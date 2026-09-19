@@ -1,8 +1,25 @@
+// DOM Elements Selection
 const quizAppSection = document.querySelector('.qa-section');
-const startBtn = document.querySelector('#start-btn').addEventListener('click', (event) => {
-    quizAppSection.classList.add('hidden');
-})
+const quizQuestionSection = document.querySelector('.qa-questions');
+const finalScoreSection = document.querySelector('.qa-finalScore');
 
+const questionTitle = document.querySelector("#question-title");
+const questionCount = document.querySelector("#question-count");
+const optionsContainer = document.querySelector("#options");
+const totalScore = document.querySelector('#scores');
+const finalScore = document.querySelector('#finalScore');
+
+// App State Variables
+let currentQuestionIndex = 0;
+let score = 0;
+
+// Start Quiz Event Listener
+document.querySelector('#start-btn').addEventListener('click', () => {
+    quizAppSection.classList.add('hidden');
+    quizQuestionSection.classList.remove('hidden');
+});
+
+// Quiz Questions Dataset
 const questions = [
     {
         id: 1,
@@ -25,8 +42,8 @@ const questions = [
     {
         id: 4,
         title: "Which HTML tag is used to create a hyperlink?",
-        correctAnswer: "<a>",
-        options: ["<link>", "<href>", "<a>", "<url>"],
+        correctAnswer: "&lt;a&gt;",
+        options: ["&lt;link&gt;", "&lt;href&gt;", "&lt;a&gt;", "&lt;url&gt;"],
     },
     {
         id: 5,
@@ -45,43 +62,51 @@ const questions = [
         title: "What does CSS stand for?",
         correctAnswer: "Cascading Style Sheets",
         options: [
-        "Computer Style Sheets",
-        "Cascading Style Sheets",
-        "Creative Style System",
-        "Colorful Style Sheets",
+            "Computer Style Sheets",
+            "Cascading Style Sheets",
+            "Creative Style System",
+            "Colorful Style Sheets",
         ],
     },
 ];
 
-const questionTitle = document.querySelector("#question-title");
-const questionCount = document.querySelector("#question-count");
-const optionsContainer = document.querySelector("#options");
-
-const currentQuestion = questions[0];
-
-questionCount.textContent = `1 of ${questions.length}`;
-
-questionTitle.textContent = currentQuestion.title;
-
-
-
-let currentQuestionIndex = 0;
-
+// Function to render the active question and its options
 function renderQuestion() {
     const currentQuestion = questions[currentQuestionIndex];
 
-    questionCount.textContent = `${currentQuestionIndex + 1} of ${questions.length}`;
+    // Update progress indicator and question header
+    questionCount.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
     questionTitle.textContent = currentQuestion.title;
 
+    // Reset container before appending new options
     optionsContainer.innerHTML = "";
 
-    currentQuestion.options.map((option) => {
+    // Update real-time score display
+    totalScore.textContent = `Score: ${score}`;
+
+    // Generate option buttons dynamically
+    currentQuestion.options.map((option, index) => {
         const button = document.createElement("button");
-
-        button.textContent = option;
-
+        
+        button.className = "w-full text-left py-3.5 px-5 rounded-2xl bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/50 hover:border-zinc-600 text-zinc-200 text-sm font-medium transition-all duration-200 cursor-pointer flex items-center justify-between group";
+        
+        button.innerHTML = `
+            <span><span class="text-zinc-500 mr-2 font-semibold">${index + 1}.</span> ${option}</span>
+            <span class="w-5 h-5 rounded-full border border-zinc-600 flex items-center justify-center text-xs group-hover:border-zinc-400"></span>
+        `;
+        
         button.addEventListener("click", () => {
+            // Check selected answer correctness
             if (option === currentQuestion.correctAnswer) {
+                score++;
+            } else {
+                score = Math.max(0, score - 1);
+            }
+
+            // Determine whether to complete the quiz or load the next question
+            if (currentQuestionIndex === questions.length - 1) {
+                showFinalScore();
+            } else {
                 currentQuestionIndex++;
                 renderQuestion();
             }
@@ -91,4 +116,22 @@ function renderQuestion() {
     });
 }
 
-renderQuestion();
+// Function to handle completion screen and final score output
+const showFinalScore = () => {
+    quizQuestionSection.classList.add('hidden');
+    
+    if (finalScoreSection) {
+        finalScoreSection.classList.remove('hidden');
+    }
+
+    if (finalScore) {
+        finalScore.textContent = `Your Final Score: ${score} / ${questions.length}`;
+    }
+};
+// Restart Quiz Event Listener (Reloads the page from scratch)
+document.querySelector('#restart-btn').addEventListener('click', () => {
+    window.location.reload();
+});
+
+// Initialize app with the first question
+renderQuestion();   

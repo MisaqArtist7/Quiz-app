@@ -9,29 +9,25 @@
 <body class="bg-black text-zinc-100 font-sans antialiased">
     
     <main class="min-h-screen flex justify-center items-center px-4">
-        <section class="hidden qa-section w-full max-w-md">
-
+        <!-- Start Section -->
+        <section class="qa-section w-full max-w-md">
             <div class="qa-wrapper bg-zinc-900/80 backdrop-blur-xl border border-zinc-800 p-8 rounded-3xl shadow-2xl text-center flex flex-col items-center">
                 
-                <!-- عنوان اصلی -->
                 <h1 class="text-3xl font-extrabold tracking-tight text-white mb-2">
                     Quiz App
                 </h1>
                 
-                <!-- زیرعنوان -->
                 <span class="text-zinc-400 text-sm mb-6 font-medium">
                     Test your knowledge
                 </span>
                 
-                <!-- بج تعداد سوالات -->
                 <div class="inline-flex items-center gap-2 bg-zinc-800/80 border border-zinc-700/60 text-zinc-300 px-4 py-1.5 rounded-full text-xs font-semibold mb-8">
                     <svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
                     </svg>
-                    <span>10 Questions</span>
+                    <span>7 Questions</span>
                 </div>
                 
-                <!-- دکمه شروع -->
                 <button id="start-btn" class="w-full py-3.5 px-6 rounded-2xl bg-white hover:bg-zinc-200 text-black font-semibold shadow-lg shadow-white/5 hover:shadow-white/10 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer">
                     Start Quiz
                 </button>
@@ -39,29 +35,43 @@
             </div>
         </section>
 
+        <!-- Questions Section (Hidden by default) -->
+        <section class="hidden qa-questions w-full max-w-md">
+            <div class="qa-wrapper bg-zinc-900/80 backdrop-blur-xl border border-zinc-800 p-8 rounded-3xl shadow-2xl flex flex-col items-stretch">
+                
+                <!-- Question Header (Count and Score) -->
+                <div class="flex justify-between items-center mb-6">
+                    <span id="question-count" class="text-xs font-semibold uppercase tracking-wider bg-zinc-800 border border-zinc-700/60 text-zinc-300 px-3 py-1.5 rounded-full"></span>
+                    <span id="scores" class="text-xs font-semibold text-zinc-400"></span>
+                </div>
 
-        <section class="qa-questions w-full max-w-md">
-            <div
-                class="qa-wrapper bg-zinc-900/80 backdrop-blur-xl border border-zinc-800 p-8 rounded-3xl shadow-2xl text-center flex flex-col items-center"
-            >
-                <span
-                    id="question-count"
-                    class="text-zinc-400 text-sm mb-6 font-medium"
-                ></span>
+                <!-- Question Title -->
+                <h1 id="question-title" class="text-xl font-bold tracking-tight text-white mb-6 text-center leading-relaxed"></h1>
 
-                <h1
-                    id="question-title"
-                    class="text-3xl font-extrabold tracking-tight text-white mb-6"
-                ></h1>
+                <!-- Options Container -->
+                <div id="options" class="w-full flex flex-col gap-3 mb-2"></div>
 
-                <div
-                    id="options"
-                    class="w-full flex flex-col gap-3"
-                ></div>
             </div>
         </section>
 
+        <!-- Final Score Section (Hidden by default) -->
+        <section class="qa-finalScore hidden w-full max-w-md">
+            <div class="qa-wrapper bg-zinc-900/80 backdrop-blur-xl border border-zinc-800 p-8 rounded-3xl shadow-2xl text-center flex flex-col items-center">
+                
+                <h2 class="text-2xl font-extrabold text-white mb-2">
+                    Quiz Completed!
+                </h2>
+                
+                <p id="finalScore" class="text-zinc-300 text-lg font-semibold mb-8"></p>
+                
+                <!-- Start From Scratch Button -->
+                <button id="restart-btn" class="w-full py-3.5 px-6 rounded-2xl bg-white hover:bg-zinc-200 text-black font-semibold shadow-lg shadow-white/5 hover:shadow-white/10 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer">
+                    Start from Scratch
+                </button>
 
+            </div>
+        </section>
+        
     </main>
 
     <script src="assets/js/app.js"></script>
